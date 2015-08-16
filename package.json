@@ -1,0 +1,67 @@
+{
+  "name": "atom-linter-alex",
+  "version": "0.0.0",
+  "description": "Linter plugin using alex to catch insensitive, inconsiderate writing",
+  "license": "MIT",
+  "keywords": [
+    "markdown",
+    "text",
+    "alex",
+    "equal",
+    "race",
+    "religion",
+    "sex",
+    "orientation",
+    "identity",
+    "gender",
+    "sensitive",
+    "insensitive",
+    "neutral",
+    "writing",
+    "language",
+    "english",
+    "linter"
+  ],
+  "author": {
+    "name": "Titus Wormer",
+    "email": "tituswormer@gmail.com",
+    "url": "wooorm.com"
+  },
+  "repository": "wooorm/atom-linter-alex",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "alex": "*"
+  },
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  },
+  "devDependencies": {
+    "eslint": "^1.1.0",
+    "jscs": "^2.1.0",
+    "jscs-jsdoc": "^1.1.0",
+    "mdast": "^1.0.0",
+    "mdast-comment-config": "^0.1.2",
+    "mdast-github": "^0.3.2",
+    "mdast-lint": "^0.4.5",
+    "mdast-slug": "^0.1.1",
+    "mdast-validate-links": "^0.3.1"
+  },
+  "scripts": {
+    "lint-api": "eslint .",
+    "lint-style": "jscs --reporter inline .",
+    "lint": "npm run lint-api && npm run lint-style",
+    "make": "npm run lint",
+    "build-md": "mdast . --quiet",
+    "build": "npm run build-md"
+  }
+}
