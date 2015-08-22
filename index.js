@@ -21,24 +21,22 @@ var alex;
  * @return {LinterConfiguration}
  */
 function linter() {
-    var RANGE_EXPRESSION = /(\d+):(\d+)(?:-(\d+):(\d+))?/;
     var CODE_EXPRESSION = /`([^`]+)`/g;
 
     /**
      * Transform a (stringified) mdast range to a linter
      * nested-tuple.
      *
-     * @param {string} range - Stringified range.
+     * @param {Object} location - Positional information.
      * @return {Array.<Array.<number>>} - Linter range.
      */
-    function getRange(range) {
-        var match = range.match(RANGE_EXPRESSION);
+    function toRange(location) {
         var result = [[], []];
 
-        result[0][0] = Number(match[1]) - 1;
-        result[0][1] = Number(match[2]) - 1;
-        result[1][0] = Number(match[3]) - 1;
-        result[1][1] = Number(match[4]) - 1;
+        result[0][0] = Number(location.start.line) - 1;
+        result[0][1] = Number(location.start.column) - 1;
+        result[1][0] = Number(location.end.line) - 1;
+        result[1][1] = Number(location.end.column) - 1;
 
         return result;
     }
@@ -69,7 +67,7 @@ function linter() {
           'text': message.reason,
           'html': toHTML(message.reason),
           'filePath': this.getPath(),
-          'range': getRange(message.name)
+          'range': toRange(message.location)
       };
     }
 
