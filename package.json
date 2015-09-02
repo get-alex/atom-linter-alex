@@ -1,6 +1,6 @@
 {
   "name": "atom-linter-alex",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Linter plugin using alex to catch insensitive, inconsiderate writing",
   "license": "MIT",
   "keywords": [
