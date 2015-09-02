@@ -1,5 +1,5 @@
 {
-  "name": "atom-linter-alex",
+  "name": "linter-alex",
   "version": "1.0.0",
   "description": "Linter plugin using alex to catch insensitive, inconsiderate writing",
   "license": "MIT",
