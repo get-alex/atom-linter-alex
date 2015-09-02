@@ -4,7 +4,7 @@
 meets [**alex**](https://github.com/wooorm/alex) to catch insensitive,
 inconsiderate writing.
 
-![screencast](./screencast.gif)
+![screencast](https://rawgit.com/wooorm/atom-linter-alex/master/screencast.gif)
 
 ## Installation
 
