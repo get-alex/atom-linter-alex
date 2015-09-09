@@ -11,7 +11,7 @@ inconsiderate writing.
 With [**Atom**](https://github.com/atom/apm):
 
 ```sh
-apm install linter atom-linter-alex
+apm install linter linter-alex
 ```
 
 ## Contributing
