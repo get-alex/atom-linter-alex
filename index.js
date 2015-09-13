@@ -39,14 +39,13 @@ function linter() {
      * @return {Array.<Array.<number>>} - Linter range.
      */
     function toRange(location) {
-        var result = [[], []];
-
-        result[0][0] = Number(location.start.line) - 1;
-        result[0][1] = Number(location.start.column) - 1;
-        result[1][0] = Number(location.end.line) - 1;
-        result[1][1] = Number(location.end.column) - 1;
-
-        return result;
+        return [[
+            Number(location.start.line) - 1,
+            Number(location.start.column) - 1
+        ], [
+            Number(location.end.line) - 1,
+            Number(location.end.column) - 1
+        ]];
     }
 
     /**
