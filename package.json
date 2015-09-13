@@ -36,8 +36,12 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "alex": "*"
+    "alex": "*",
+    "atom-package-deps": "^2.1.2"
   },
+  "package-deps": [
+    "linter"
+  ],
   "providedServices": {
     "linter": {
       "versions": {

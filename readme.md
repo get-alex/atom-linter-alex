@@ -8,10 +8,10 @@ inconsiderate writing.
 
 ## Installation
 
-With [**Atom**](https://github.com/atom/apm):
+With [**apm**](https://github.com/atom/apm):
 
 ```sh
-apm install linter linter-alex
+apm install linter-alex
 ```
 
 ## Contributing

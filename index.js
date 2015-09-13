@@ -9,10 +9,18 @@
 'use strict';
 
 /*
- * Dependencies (lazy-loaded later).
+ * Dependencies (alex is lazy-loaded later).
  */
 
+var deps = require('atom-package-deps');
 var alex;
+
+/**
+ * Activate.
+ */
+function activate() {
+    deps.install('linter-alex');
+}
 
 /**
  * Atom meets alex to catch insensitive, inconsiderate
@@ -124,5 +132,6 @@ function linter() {
 
 module.exports = {
     'config': {},
-    'provideLinter': linter
+    'provideLinter': linter,
+    'activate': activate
 }
