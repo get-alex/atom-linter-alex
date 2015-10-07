@@ -119,6 +119,7 @@ function linter() {
             'text.plain',
             'text.plain.null-grammar'
         ],
+        'name': 'alex',
         'scope': 'file',
         'lintOnFly': true,
         'lint': onchange
