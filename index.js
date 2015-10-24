@@ -6,6 +6,8 @@
  * @fileoverview Linter.
  */
 
+/* global atom */
+
 'use strict';
 
 /*
@@ -13,7 +15,14 @@
  */
 
 var deps = require('atom-package-deps');
+var minimatch = require('minimatch');
 var alex;
+
+/*
+ * Constants.
+ */
+
+var config = atom.config;
 
 /**
  * Activate.
@@ -91,6 +100,12 @@ function linter() {
      *  resolved with a list of linter-errors or an error.
      */
     function onchange(editor) {
+        var settings = config.get('linter-alex');
+
+        if (minimatch(editor.getPath(), settings.ignoreFiles)) {
+            return [];
+        }
+
         return new Promise(function (resolve, reject) {
             var messages;
 
@@ -131,7 +146,13 @@ function linter() {
  */
 
 module.exports = {
-    'config': {},
+    'config': {
+        'ignoreFiles': {
+            'description': 'Disable files matching (minimatch) glob',
+            'type': 'string',
+            'default': ''
+        }
+    },
     'provideLinter': linter,
     'activate': activate
 }
