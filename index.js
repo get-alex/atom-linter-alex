@@ -80,7 +80,6 @@ function linter() {
     function transform(message) {
         return {
           'type': 'Error',
-          'text': message.reason,
           'html': toHTML(message.reason),
           'filePath': this.getPath(),
           'range': toRange(message.location)
