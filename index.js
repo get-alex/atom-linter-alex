@@ -41,7 +41,7 @@ function linter() {
     var CODE_EXPRESSION = /`([^`]+)`/g;
 
     /**
-     * Transform a (stringified) mdast range to a linter
+     * Transform a (stringified) vfile range to a linter
      * nested-tuple.
      *
      * @param {Object} location - Positional information.
