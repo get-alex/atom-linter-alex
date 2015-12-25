@@ -123,16 +123,8 @@ function linter() {
         });
     }
 
-    // He is such a douche So is she..
-
     return {
-        'grammarScopes': [
-            'source.gfm',
-            'source.pfm',
-            'text.git-commit',
-            'text.plain',
-            'text.plain.null-grammar'
-        ],
+        'grammarScopes': config.get('linter-alex').grammars,
         'name': 'alex',
         'scope': 'file',
         'lintOnFly': true,
@@ -150,6 +142,20 @@ module.exports = {
             'description': 'Disable files matching (minimatch) glob',
             'type': 'string',
             'default': ''
+        },
+        'grammars': {
+            'description': 'List of scopes for languages which will be ' +
+                'checked. Note: setting new sources overwrites the ' +
+                'defaults.',
+            'type': 'array',
+            'default': [
+                'source.asciidoc',
+                'source.gfm',
+                'source.pfm',
+                'text.git-commit',
+                'text.plain',
+                'text.plain.null-grammar'
+            ]
         }
     },
     'provideLinter': linter,
