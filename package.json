@@ -65,8 +65,8 @@
     "lint-api": "eslint .",
     "lint-style": "jscs --reporter inline .",
     "lint": "npm run lint-api && npm run lint-style",
-    "make": "npm run lint",
     "build-md": "remark . --quiet",
-    "build": "npm run build-md"
+    "build": "npm run build-md",
+    "test": "npm run build && npm run lint"
   }
 }
