@@ -25,9 +25,13 @@
   "author": {
     "name": "Titus Wormer",
     "email": "tituswormer@gmail.com",
-    "url": "wooorm.com"
+    "url": "http://wooorm.com"
   },
-  "repository": "wooorm/atom-linter-alex",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/atom-linter-alex.git"
+  },
+  "bugs": "https://github.com/wooorm/atom-linter-alex/issues",
   "main": "index.js",
   "files": [
     "index.js"
