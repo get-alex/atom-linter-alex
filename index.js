@@ -7,6 +7,7 @@
  */
 
 /* global atom */
+/* eslint-env node */
 
 'use strict';
 
@@ -35,7 +36,7 @@ function activate() {
  * Atom meets alex to catch insensitive, inconsiderate
  * writing.
  *
- * @return {LinterConfiguration}
+ * @return {LinterConfiguration} - Configuration.
  */
 function linter() {
     var CODE_EXPRESSION = /`([^`]+)`/g;
@@ -129,7 +130,7 @@ function linter() {
         'scope': 'file',
         'lintOnFly': true,
         'lint': onchange
-    }
+    };
 }
 
 /*
@@ -160,4 +161,4 @@ module.exports = {
     },
     'provideLinter': linter,
     'activate': activate
-}
+};
