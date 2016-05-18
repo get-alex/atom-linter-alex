@@ -6,7 +6,7 @@
  * @fileoverview Linter.
  */
 
-/* global atom */
+/* global atom Promise */
 /* eslint-env node */
 
 'use strict';
@@ -80,11 +80,11 @@ function linter() {
      */
     function transform(message) {
         return {
-          'type': 'Error',
-          'html': toHTML(message.reason),
-          'filePath': this.getPath(),
-          'range': toRange(message.location)
-      };
+            'type': 'Error',
+            'html': toHTML(message.reason),
+            'filePath': this.getPath(),
+            'range': toRange(message.location)
+        };
     }
 
     /**

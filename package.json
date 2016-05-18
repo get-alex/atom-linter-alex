@@ -40,8 +40,8 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "alex": ">=1.6.0",
-    "atom-package-deps": "^3.0.0",
+    "alex": ">=3.0.0",
+    "atom-package-deps": "^4.0.0",
     "minimatch": "^3.0.0"
   },
   "package-deps": [
@@ -55,15 +55,14 @@
     }
   },
   "devDependencies": {
-    "eslint": "^1.1.0",
-    "jscs": "^2.1.0",
-    "jscs-jsdoc": "^1.1.0",
-    "remark": "^3.0.0",
-    "remark-comment-config": "^2.0.0",
-    "remark-github": "^4.0.0",
-    "remark-lint": "^2.0.0",
-    "remark-slug": "^4.0.0",
-    "remark-validate-links": "^2.0.0"
+    "eslint": "^2.0.0",
+    "jscs": "^3.0.0",
+    "jscs-jsdoc": "^2.0.0",
+    "remark": "^4.0.0",
+    "remark-comment-config": "^3.0.0",
+    "remark-github": "^4.0.1",
+    "remark-lint": "^3.0.0",
+    "remark-validate-links": "^3.0.0"
   },
   "scripts": {
     "lint-api": "eslint .",
