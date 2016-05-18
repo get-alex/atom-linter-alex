@@ -1,6 +1,6 @@
 {
   "name": "linter-alex",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Linter plugin using alex to catch insensitive, inconsiderate writing",
   "license": "MIT",
   "keywords": [
