@@ -39,7 +39,7 @@ function activate() {
  * @return {LinterConfiguration} - Configuration.
  */
 function linter() {
-    var CODE_EXPRESSION = /`([^`]+)`/g;
+    var CODE_EXPRESSION = /[“`]([^`]+)[`”]/g;
 
     /**
      * Transform a (stringified) vfile range to a linter
