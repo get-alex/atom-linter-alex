@@ -25,6 +25,17 @@ var alex;
 
 var config = atom.config;
 
+/*
+ * Message levels.
+ */
+
+var map = {
+    '0': 'info',
+    '1': 'warning',
+    '2': 'error',
+    'undefined': 'warning'
+};
+
 /**
  * Activate.
  */
@@ -80,7 +91,7 @@ function linter() {
      */
     function transform(message) {
         return {
-            'type': 'Error',
+            'type': map[message.profanitySeverity] || map.undefined,
             'html': toHTML(message.reason),
             'filePath': this.getPath(),
             'range': toRange(message.location)
