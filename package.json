@@ -22,11 +22,11 @@
     "english",
     "linter"
   ],
-  "author": {
-    "name": "Titus Wormer",
-    "email": "tituswormer@gmail.com",
-    "url": "http://wooorm.com"
-  },
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+    "Blake Embrey <hello@blakeembrey.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/wooorm/atom-linter-alex.git"
