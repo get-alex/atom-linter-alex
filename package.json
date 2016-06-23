@@ -58,11 +58,11 @@
     "eslint": "^2.0.0",
     "jscs": "^3.0.0",
     "jscs-jsdoc": "^2.0.0",
-    "remark": "^4.0.0",
-    "remark-comment-config": "^3.0.0",
-    "remark-github": "^4.0.1",
+    "remark-cli": "^1.0.0",
+    "remark-comment-config": "^4.0.0",
+    "remark-github": "^5.0.0",
     "remark-lint": "^4.0.0",
-    "remark-validate-links": "^3.0.0"
+    "remark-validate-links": "^4.0.0"
   },
   "scripts": {
     "lint-api": "eslint .",
