@@ -15,7 +15,7 @@ apm install linter-alex
 
 ## Contributing
 
-Issues regarding **atom-linter-alex** should be opened in this
+Issues regarding **linter-alex** should be opened in this
 [repository][linter-issues].
 Please raise issues with **alex** on its [repository][alex-issues].
 

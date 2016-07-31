@@ -55,21 +55,32 @@
     }
   },
   "devDependencies": {
-    "eslint": "^2.0.0",
-    "jscs": "^3.0.0",
-    "jscs-jsdoc": "^2.0.0",
     "remark-cli": "^1.0.0",
     "remark-comment-config": "^4.0.0",
     "remark-github": "^5.0.0",
     "remark-lint": "^4.0.0",
-    "remark-validate-links": "^4.0.0"
+    "remark-validate-links": "^4.0.0",
+    "xo": "^0.16.0"
   },
   "scripts": {
-    "lint-api": "eslint .",
-    "lint-style": "jscs --reporter inline .",
-    "lint": "npm run lint-api && npm run lint-style",
-    "build-md": "remark . --quiet",
+    "lint": "xo",
+    "build-md": "remark . --quiet --frail",
     "build": "npm run build-md",
     "test": "npm run build && npm run lint"
+  },
+  "xo": {
+    "space": true
+  },
+  "remarkConfig": {
+    "output": true,
+    "plugins": [
+      "lint",
+      "github",
+      "comment-config",
+      "validate-links"
+    ],
+    "settings": {
+      "bullet": "*"
+    }
   }
 }
