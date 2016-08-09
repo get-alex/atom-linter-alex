@@ -44,9 +44,6 @@ module.exports = {
   activate: activate
 };
 
-/* Constants. */
-var config = atom.config;
-
 /* Message levels. */
 var map = {
   0: 'info',
@@ -71,51 +68,13 @@ function activate() {
 function linter() {
   var CODE_EXPRESSION = /[“`]([^`]+)[`”]/g;
 
-  /**
-   * Transform a (stringified) vfile range to a linter
-   * nested-tuple.
-   *
-   * @param {Object} location - Positional information.
-   * @return {Array.<Array.<number>>} - Linter range.
-   */
-  function toRange(location) {
-    return [[
-      Number(location.start.line) - 1,
-      Number(location.start.column) - 1
-    ], [
-      Number(location.end.line) - 1,
-      Number(location.end.column) - 1
-    ]];
-  }
-
-  /**
-   * Transform a reason for warning from alex into
-   * pretty HTML.
-   *
-   * @param {string} reason - Messsage in plain-text.
-   * @return {string} - Messsage in HTML.
-   */
-  function toHTML(reason) {
-    return reason.replace(CODE_EXPRESSION, '<code>$1</code>');
-  }
-
-  /**
-   * Transform VFile messages
-   * nested-tuple.
-   *
-   * @see https://github.com/wooorm/vfile#vfilemessage
-   *
-   * @param {VFileMessage} message - Virtual file error.
-   * @return {Object} - Linter error.
-   */
-  function transform(message) {
-    return {
-      type: map[message.profanitySeverity] || map.undefined,
-      html: toHTML(message.reason),
-      filePath: this.getPath(),
-      range: toRange(message.location)
-    };
-  }
+  return {
+    grammarScopes: atom.config.get('linter-alex').grammars,
+    name: 'alex',
+    scope: 'file',
+    lintOnFly: true,
+    lint: onchange
+  };
 
   /**
    * Handle on-the-fly or on-save (depending on the
@@ -130,7 +89,7 @@ function linter() {
    *  resolved with a list of linter-errors or an error.
    */
   function onchange(editor) {
-    var settings = config.get('linter-alex');
+    var settings = atom.config.get('linter-alex');
 
     if (minimatch(editor.getPath(), settings.ignoreFiles)) {
       return [];
@@ -154,11 +113,49 @@ function linter() {
     });
   }
 
-  return {
-    grammarScopes: config.get('linter-alex').grammars,
-    name: 'alex',
-    scope: 'file',
-    lintOnFly: true,
-    lint: onchange
-  };
+  /**
+   * Transform VFile messages
+   * nested-tuple.
+   *
+   * @see https://github.com/wooorm/vfile#vfilemessage
+   *
+   * @param {VFileMessage} message - Virtual file error.
+   * @return {Object} - Linter error.
+   */
+  function transform(message) {
+    return {
+      type: map[message.profanitySeverity] || map.undefined,
+      html: toHTML(message.reason),
+      filePath: this.getPath(),
+      range: toRange(message.location)
+    };
+  }
+
+  /**
+   * Transform a reason for warning from alex into
+   * pretty HTML.
+   *
+   * @param {string} reason - Messsage in plain-text.
+   * @return {string} - Messsage in HTML.
+   */
+  function toHTML(reason) {
+    return reason.replace(CODE_EXPRESSION, '<code>$1</code>');
+  }
+
+  /**
+   * Transform a (stringified) vfile range to a linter
+   * nested-tuple.
+   *
+   * @param {Object} location - Positional information.
+   * @return {Array.<Array.<number>>} - Linter range.
+   */
+  function toRange(location) {
+    return [[
+      Number(location.start.line) - 1,
+      Number(location.start.column) - 1
+    ], [
+      Number(location.end.line) - 1,
+      Number(location.end.column) - 1
+    ]];
+  }
 }
