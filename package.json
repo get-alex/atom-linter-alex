@@ -44,6 +44,7 @@
     "atom-package-deps": "^4.0.0",
     "minimatch": "^3.0.0"
   },
+  "atomTestRunner": "atom-tap-test-runner",
   "package-deps": [
     "linter"
   ],
@@ -55,18 +56,21 @@
     }
   },
   "devDependencies": {
+    "atom-tap-test-runner": "^1.0.0",
     "remark-cli": "^1.0.0",
     "remark-comment-config": "^4.0.0",
     "remark-github": "^5.0.0",
     "remark-lint": "^4.0.0",
     "remark-validate-links": "^4.0.0",
+    "tape": "^4.6.0",
     "xo": "^0.16.0"
   },
   "scripts": {
-    "lint": "xo",
     "build-md": "remark . --quiet --frail",
     "build": "npm run build-md",
-    "test": "npm run build && npm run lint"
+    "lint": "xo",
+    "test-api": "atom --test test/index.js",
+    "test": "npm run build && npm run lint && npm run test-api"
   },
   "xo": {
     "space": true
