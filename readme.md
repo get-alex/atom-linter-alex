@@ -1,4 +1,4 @@
-# atom-linter-alex
+# atom-linter-alex [![Build Status](https://img.shields.io/travis/wooorm/atom-linter-alex.svg)](https://travis-ci.org/wooorm/atom-linter-alex)
 
 [**Atom**][atom] [**linter**][linter] meets [**alex**][alex] to catch
 insensitive, inconsiderate writing.
