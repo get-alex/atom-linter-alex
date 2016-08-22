@@ -27,10 +27,7 @@
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
     "Blake Embrey <hello@blakeembrey.com>"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wooorm/atom-linter-alex.git"
-  },
+  "repository": "https://github.com/wooorm/atom-linter-alex",
   "bugs": "https://github.com/wooorm/atom-linter-alex/issues",
   "main": "index.js",
   "files": [
@@ -57,16 +54,13 @@
   },
   "devDependencies": {
     "atom-tap-test-runner": "^1.0.0",
-    "remark-cli": "^1.0.0",
-    "remark-comment-config": "^4.0.0",
-    "remark-github": "^5.0.0",
-    "remark-lint": "^4.0.0",
-    "remark-validate-links": "^4.0.0",
+    "remark-cli": "^2.0.0",
+    "remark-preset-wooorm": "^1.0.0",
     "tape": "^4.6.0",
     "xo": "^0.16.0"
   },
   "scripts": {
-    "build-md": "remark . --quiet --frail",
+    "build-md": "remark *.md --quiet --frail",
     "build": "npm run build-md",
     "lint": "xo",
     "test-api": "atom --test test/index.js",
@@ -77,14 +71,6 @@
   },
   "remarkConfig": {
     "output": true,
-    "plugins": [
-      "lint",
-      "github",
-      "comment-config",
-      "validate-links"
-    ],
-    "settings": {
-      "bullet": "*"
-    }
+    "presets": "wooorm"
   }
 }
