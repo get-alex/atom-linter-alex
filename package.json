@@ -55,7 +55,7 @@
   "devDependencies": {
     "atom-tap-test-runner": "^1.0.0",
     "remark-cli": "^2.0.0",
-    "remark-preset-wooorm": "^1.0.0",
+    "remark-preset-wooorm": "^2.0.0",
     "tape": "^4.6.0",
     "xo": "^0.17.0"
   },
