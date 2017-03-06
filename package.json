@@ -54,13 +54,13 @@
   },
   "devDependencies": {
     "atom-tap-test-runner": "^1.0.0",
-    "remark-cli": "^2.0.0",
-    "remark-preset-wooorm": "^1.0.0",
+    "remark-cli": "^3.0.0",
+    "remark-preset-wooorm": "^2.0.0",
     "tape": "^4.6.0",
     "xo": "^0.17.0"
   },
   "scripts": {
-    "build-md": "remark *.md --quiet --frail",
+    "build-md": "remark *.md -qfo",
     "build": "npm run build-md",
     "lint": "xo",
     "test-api": "atom --test test/index.js",
@@ -70,7 +70,8 @@
     "space": true
   },
   "remarkConfig": {
-    "output": true,
-    "presets": "wooorm"
+    "plugins": [
+      "preset-wooorm"
+    ]
   }
 }
