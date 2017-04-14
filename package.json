@@ -57,7 +57,7 @@
     "remark-cli": "^3.0.0",
     "remark-preset-wooorm": "^2.0.0",
     "tape": "^4.6.0",
-    "xo": "^0.17.0"
+    "xo": "^0.18.1"
   },
   "scripts": {
     "build-md": "remark *.md -qfo",
@@ -67,7 +67,8 @@
     "test": "npm run build && npm run lint && npm run test-api"
   },
   "xo": {
-    "space": true
+    "space": true,
+    "esnext": false
   },
   "remarkConfig": {
     "plugins": [
