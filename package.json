@@ -37,9 +37,16 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "alex": ">=3.0.0",
     "atom-package-deps": "^4.0.0",
-    "minimatch": "^3.0.0"
+    "minimatch": "^3.0.0",
+    "remark-message-control": "^4.0.0",
+    "remark-parse": "^3.0.0",
+    "remark-retext": "^3.0.0",
+    "retext-english": "^3.0.0",
+    "retext-equality": "^3.0.0",
+    "retext-profanities": "^4.1.0",
+    "unified": "^6.1.2",
+    "unified-engine-atom": "^5.0.0"
   },
   "atomTestRunner": "atom-tap-test-runner",
   "package-deps": [
@@ -48,7 +55,7 @@
   "providedServices": {
     "linter": {
       "versions": {
-        "1.0.0": "provideLinter"
+        "2.0.0": "provideLinter"
       }
     }
   },
@@ -74,5 +81,40 @@
     "plugins": [
       "preset-wooorm"
     ]
+  },
+  "configSchema": {
+    "detectConfig": {
+      "title": "Config files",
+      "description": "Use `.alexrc` files and `alex` in `package.json` files.",
+      "type": "boolean",
+      "default": true
+    },
+    "detectIgnore": {
+      "title": "Ignore files",
+      "description": "Use `.alexignore` files.",
+      "type": "boolean",
+      "default": true
+    },
+    "ignoreFiles": {
+      "description": "Disable files matching (minimatch) glob",
+      "type": "string",
+      "default": ""
+    },
+    "scopes": {
+      "title": "Scopes",
+      "description": "List of scopes for languages which will be checked (run `Editor: Log Cursor Scope` to determine the scopes for a file).",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "source.asciidoc",
+        "source.gfm",
+        "source.pfm",
+        "text.git-commit",
+        "text.plain",
+        "text.plain.null-grammar"
+      ]
+    }
   }
 }

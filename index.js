@@ -1,161 +1,153 @@
-/**
- * @author Titus Wormer
- * @copyright 2015 Titus Wormer
- * @license MIT
- * @module atom:linter:alex
- * @fileoverview Linter.
- */
-
-/* global atom Promise */
-
 'use strict';
 
-/* Dependencies (alex is lazy-loaded later). */
+/* eslint-env node, browser */
+/* global atom */
 
-var deps = require('atom-package-deps');
-var minimatch = require('minimatch');
+var CompositeDisposable = require('atom').CompositeDisposable;
 
-var alex;
+exports.activate = activate;
+exports.deactivate = deactivate;
+exports.provideLinter = provideLinter;
 
-/* Expose. */
-module.exports = {
-  config: {
-    ignoreFiles: {
-      description: 'Disable files matching (minimatch) glob',
-      type: 'string',
-      default: ''
-    },
-    grammars: {
-      description: 'List of scopes for languages which will be ' +
-        'checked. Note: setting new sources overwrites the ' +
-        'defaults.',
-      type: 'array',
-      default: [
-        'source.asciidoc',
-        'source.gfm',
-        'source.pfm',
-        'text.git-commit',
-        'text.plain',
-        'text.plain.null-grammar'
-      ]
-    }
-  },
-  provideLinter: linter,
-  activate: activate
-};
+/* Internal variables. */
+var load = loadOnce;
+var minimatch;
+var engine;
+var unified;
+var markdown;
+var english;
+var control;
+var remark2retext;
+var equality;
+var profanities;
+var idleCallbacks = [];
+var subscriptions = new CompositeDisposable();
+var config = {};
 
-/* Message levels. */
-var map = {
-  0: 'info',
-  1: 'warning',
-  2: 'error',
-  undefined: 'warning'
-};
+function lint(editor) {
+  load();
 
-/**
- * Activate.
- */
-function activate() {
-  deps.install('linter-alex');
+  if (minimatch(editor.getPath(), config.ignoreFiles)) {
+    return [];
+  }
+
+  return engine({
+    processor: unified,
+    detectIgnore: config.detectIgnore,
+    detectConfig: config.detectConfig,
+    rcName: '.alexrc',
+    packageField: 'alex',
+    ignoreName: '.alexignore',
+    defaultConfig: transform(),
+    configTransform: transform
+  })(editor);
 }
 
-/**
- * Atom meets alex to catch insensitive, inconsiderate
- * writing.
- *
- * @return {LinterConfiguration} - Configuration.
- */
-function linter() {
-  var CODE_EXPRESSION = /[“`]([^`]+)[`”]/g;
-
+function provideLinter() {
   return {
-    grammarScopes: atom.config.get('linter-alex').grammars,
+    grammarScopes: config.scopes,
     name: 'alex',
     scope: 'file',
-    lintOnFly: true,
-    lint: onchange
+    lintsOnChange: true,
+    lint: lint
   };
+}
 
-  /**
-   * Handle on-the-fly or on-save (depending on the
-   * global atom-linter settings) events. Yeah!
-   *
-   * Loads `alex` on first invocation.
-   *
-   * @see https://github.com/atom-community/linter/wiki/Linter-API#messages
-   *
-   * @param {AtomTextEditor} editor - Access to editor.
-   * @return {Promise.<Message, Error>} - Promise
-   *  resolved with a list of linter-errors or an error.
-   */
-  function onchange(editor) {
-    var settings = atom.config.get('linter-alex');
+function activate() {
+  var schema = require('./package').configSchema;
+  var id = window.requestIdleCallback(install);
+  idleCallbacks.push(id);
 
-    if (minimatch(editor.getPath(), settings.ignoreFiles)) {
-      return [];
+  Object.keys(schema).forEach(function (key) {
+    subscriptions.add(atom.config.observe('linter-alex.' + key, setter));
+
+    function setter(value) {
+      config[key] = value;
+    }
+  });
+
+  function install() {
+    idleCallbacks.splice(idleCallbacks.indexOf(id), 1);
+
+    /* Install package dependencies */
+    if (!atom.inSpecMode()) {
+      require('atom-package-deps').install('linter-alex');
     }
 
-    return new Promise(function (resolve, reject) {
-      var messages;
+    /* Load required modules. */
+    load();
+  }
+}
 
-      if (!alex) {
-        alex = require('alex');
-      }
+function deactivate() {
+  idleCallbacks.forEach(removeIdleCallback);
+  idleCallbacks = [];
 
-      try {
-        messages = alex(editor.getText()).messages;
-      } catch (err) {
-        reject(err);
-        return;
-      }
+  subscriptions.dispose();
 
-      resolve((messages || []).map(transform, editor));
-    });
+  function removeIdleCallback(id) {
+    window.cancelIdleCallback(id);
+  }
+}
+
+function loadOnce() {
+  engine = require('unified-engine-atom');
+  unified = require('unified');
+  english = require('retext-english');
+  markdown = require('remark-parse');
+  remark2retext = require('remark-retext');
+  control = require('remark-message-control');
+  equality = require('retext-equality');
+  profanities = require('retext-profanities');
+  minimatch = require('minimatch');
+
+  load = noop;
+}
+
+function noop() {}
+
+function transform(options) {
+  var settings = options || {};
+
+  return {
+    plugins: [
+      markdown,
+      [
+        remark2retext,
+        unified()
+          .use(english)
+          .use(profanities)
+          .use(equality, {noBinary: settings.noBinary})
+      ],
+      [filter, {allow: settings.allow}],
+      severity
+    ]
+  };
+}
+
+function filter(options) {
+  return control({
+    name: 'alex',
+    disable: options.allow,
+    source: ['retext-equality', 'retext-profanities']
+  });
+}
+
+function severity() {
+  var map = {
+    0: null,
+    1: false,
+    2: true,
+    undefined: false
+  };
+
+  return transformer;
+
+  function transformer(tree, file) {
+    file.messages.forEach(transform);
   }
 
-  /**
-   * Transform VFile messages
-   * nested-tuple.
-   *
-   * @see https://github.com/wooorm/vfile#vfilemessage
-   *
-   * @param {VFileMessage} message - Virtual file error.
-   * @return {Object} - Linter error.
-   */
   function transform(message) {
-    return {
-      type: map[message.profanitySeverity] || map.undefined,
-      html: toHTML(message.reason),
-      filePath: this.getPath(),
-      range: toRange(message.location)
-    };
-  }
-
-  /**
-   * Transform a reason for warning from alex into
-   * pretty HTML.
-   *
-   * @param {string} reason - Messsage in plain-text.
-   * @return {string} - Messsage in HTML.
-   */
-  function toHTML(reason) {
-    return reason.replace(CODE_EXPRESSION, '<code>$1</code>');
-  }
-
-  /**
-   * Transform a (stringified) vfile range to a linter
-   * nested-tuple.
-   *
-   * @param {Object} location - Positional information.
-   * @return {Array.<Array.<number>>} - Linter range.
-   */
-  function toRange(location) {
-    return [[
-      Number(location.start.line) - 1,
-      Number(location.start.column) - 1
-    ], [
-      Number(location.end.line) - 1,
-      Number(location.end.column) - 1
-    ]];
+    message.fatal = map[message.profanitySeverity];
   }
 }

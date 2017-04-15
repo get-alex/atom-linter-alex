@@ -54,17 +54,11 @@ test('unified-engine-atom', function (t) {
       t.deepEqual(
         messages.map(flatten),
         [
-          '<code>boogeyman</code> may be insensitive, use ' +
-          '<code>boogey</code> instead',
-          '<code>master</code> / <code>slaves</code> may be ' +
-          'insensitive, use <code>primary</code> / <code>replica' +
-          '</code> instead',
-          '<code>he</code> may be insensitive, use <code>they</code>, ' +
-          '<code>it</code> instead',
-          '<code>cripple</code> may be insensitive, use <code>person ' +
-          'with a limp</code> instead',
-          'Be careful with <code>butt</code>, it’s profane in some ' +
-          'cases'
+          'Be careful with `butt`, it’s profane in some cases (retext-profanities:butt)',
+          '`boogeyman` may be insensitive, use `boogey` instead (retext-equality:boogeyman-boogeywoman)',
+          '`master` / `slaves` may be insensitive, use `primary` / `replica` instead (retext-equality:master-slave)',
+          '`cripple` may be insensitive, use `person with a limp` instead (retext-equality:cripple)',
+          '`he` may be insensitive, use `they`, `it` instead (retext-equality:he-she)'
         ],
         'should emit messages'
       );
@@ -72,5 +66,5 @@ test('unified-engine-atom', function (t) {
 });
 
 function flatten(message) {
-  return message.html;
+  return message.excerpt;
 }
