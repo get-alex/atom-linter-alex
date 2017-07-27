@@ -17,7 +17,7 @@ var lint = require('..');
 /* Methods. */
 var join = path.join;
 
-test('unified-engine-atom', function (t) {
+test('linter-alex', function (t) {
   t.plan(2);
 
   atom.workspace.destroyActivePaneItem();
@@ -54,7 +54,7 @@ test('unified-engine-atom', function (t) {
       t.deepEqual(
         messages.map(flatten),
         [
-          'Be careful with `butt`, it’s profane in some cases (retext-profanities:butt)',
+          'Don’t use `slaves`, it’s profane (retext-profanities:slaves)',
           '`boogeyman` may be insensitive, use `boogey` instead (retext-equality:boogeyman-boogeywoman)',
           '`master` / `slaves` may be insensitive, use `primary` / `replica` instead (retext-equality:master-slave)',
           '`cripple` may be insensitive, use `person with a limp` instead (retext-equality:cripple)',
