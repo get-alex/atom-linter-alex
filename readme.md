@@ -1,13 +1,13 @@
 # atom-linter-alex [![Build Status](https://img.shields.io/travis/wooorm/atom-linter-alex.svg)](https://travis-ci.org/wooorm/atom-linter-alex)
 
-[**Atom**][atom] [**linter**][linter] meets [**alex**][alex] to catch
+[Atom][atom] [linter][linter] meets [alex][alex] to catch potentially
 insensitive, inconsiderate writing.
 
 ![screencast][]
 
 ## Installation
 
-With [**apm**][apm]:
+[apm][]:
 
 ```sh
 apm install linter-alex
@@ -15,9 +15,9 @@ apm install linter-alex
 
 ## Contributing
 
-Issues regarding **linter-alex** should be opened in this
-[repository][linter-issues].
-Please raise issues with **alex** on its [repository][alex-issues].
+Issues regarding `linter-alex` should be opened in this
+[repository][linter-issues].  Please raise issues with alex on its
+[repository][alex-issues].
 
 ## License
 
