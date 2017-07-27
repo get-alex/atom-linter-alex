@@ -1,21 +1,10 @@
-/**
- * @author Titus Wormer
- * @copyright 2015 Titus Wormer
- * @license MIT
- * @fileoverview Test suite for `linter-alex`.
- */
-
 'use strict';
 
 /* global atom */
 
-/* Dependencies. */
 var path = require('path');
 var test = require('tape');
 var lint = require('..');
-
-/* Methods. */
-var join = path.join;
 
 test('linter-alex', function (t) {
   t.plan(2);
@@ -25,7 +14,7 @@ test('linter-alex', function (t) {
   Promise.resolve()
     .then(function () {
       return atom.packages.activatePackage(
-        join(__dirname, '..')
+        path.join(__dirname, '..')
       );
     })
     .then(function () {
@@ -33,7 +22,7 @@ test('linter-alex', function (t) {
     })
     .then(function () {
       return atom.workspace.open(
-        join(path.resolve(__dirname, '..'), 'readme.md')
+        path.join(path.resolve(__dirname, '..'), 'readme.md')
       );
     })
     .then(function (editor) {
@@ -44,7 +33,7 @@ test('linter-alex', function (t) {
     })
     .then(function () {
       return atom.workspace.open(
-        join(__dirname, 'invalid.md')
+        path.join(__dirname, 'invalid.md')
       );
     })
     .then(function (editor) {
