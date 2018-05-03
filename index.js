@@ -27,7 +27,7 @@ var config = {};
 function lint(editor) {
   load();
 
-  if (minimatch(editor.getPath(), config.ignoreFiles)) {
+  if (config.ignoreFiles && minimatch(editor.getPath(), config.ignoreFiles)) {
     return [];
   }
 

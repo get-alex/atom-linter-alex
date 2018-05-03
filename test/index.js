@@ -51,7 +51,7 @@ test('linter-alex', function (t) {
         ],
         'should emit messages'
       );
-    });
+    }, t.ifErr);
 });
 
 function flatten(message) {
