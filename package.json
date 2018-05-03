@@ -40,7 +40,7 @@
     "atom-package-deps": "^4.0.0",
     "minimatch": "^3.0.0",
     "remark-message-control": "^4.0.0",
-    "remark-parse": "^4.0.0",
+    "remark-parse": "^5.0.0",
     "remark-retext": "^3.0.0",
     "retext-english": "^3.0.0",
     "retext-equality": "^3.0.0",
@@ -60,11 +60,11 @@
     }
   },
   "devDependencies": {
-    "atom-tap-test-runner": "^4.0.0",
-    "remark-cli": "^4.0.0",
-    "remark-preset-wooorm": "^3.0.0",
+    "atom-tap-test-runner": "^5.0.0",
+    "remark-cli": "^5.0.0",
+    "remark-preset-wooorm": "^4.0.0",
     "tape": "^4.6.0",
-    "xo": "^0.18.1"
+    "xo": "^0.20.0"
   },
   "scripts": {
     "build-md": "remark *.md -qfo",
@@ -75,7 +75,12 @@
   },
   "xo": {
     "space": true,
-    "esnext": false
+    "esnext": false,
+    "rules": {
+      "no-var": "off",
+      "object-shorthand": "off",
+      "prefer-arrow-callback": "off"
+    }
   },
   "remarkConfig": {
     "plugins": [
