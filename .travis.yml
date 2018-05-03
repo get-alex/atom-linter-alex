@@ -1,6 +1,7 @@
 language: node_js
 node_js:
-- '8.0'
+- lts/boron
+- node
 os: linux
 dist: trusty
 install: true
