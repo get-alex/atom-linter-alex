@@ -1,45 +1,41 @@
-'use strict';
+'use strict'
 
 /* global atom */
 
-var path = require('path');
-var test = require('tape');
-var lint = require('..');
+var path = require('path')
+var test = require('tape')
+var lint = require('..')
 
-test('linter-alex', function (t) {
-  t.plan(2);
+test('linter-alex', function(t) {
+  t.plan(2)
 
-  atom.workspace.destroyActivePaneItem();
+  atom.workspace.destroyActivePaneItem()
 
   Promise.resolve()
-    .then(function () {
-      return atom.packages.activatePackage(
-        path.join(__dirname, '..')
-      );
+    .then(function() {
+      return atom.packages.activatePackage(path.join(__dirname, '..'))
     })
-    .then(function () {
-      return atom.packages.activatePackage('language-gfm');
+    .then(function() {
+      return atom.packages.activatePackage('language-gfm')
     })
-    .then(function () {
+    .then(function() {
       return atom.workspace.open(
         path.join(path.resolve(__dirname, '..'), 'readme.md')
-      );
+      )
     })
-    .then(function (editor) {
-      return lint.provideLinter().lint(editor);
+    .then(function(editor) {
+      return lint.provideLinter().lint(editor)
     })
-    .then(function (messages) {
-      t.equal(messages.length, 0, 'should start out without messages');
+    .then(function(messages) {
+      t.equal(messages.length, 0, 'should start out without messages')
     })
-    .then(function () {
-      return atom.workspace.open(
-        path.join(__dirname, 'invalid.md')
-      );
+    .then(function() {
+      return atom.workspace.open(path.join(__dirname, 'invalid.md'))
     })
-    .then(function (editor) {
-      return lint.provideLinter().lint(editor);
+    .then(function(editor) {
+      return lint.provideLinter().lint(editor)
     })
-    .then(function (messages) {
+    .then(function(messages) {
       t.deepEqual(
         messages.map(flatten),
         [
@@ -50,10 +46,10 @@ test('linter-alex', function (t) {
           '`he` may be insensitive, use `they`, `it` instead (retext-equality:he-she)'
         ],
         'should emit messages'
-      );
-    }, t.ifErr);
-});
+      )
+    }, t.ifErr)
+})
 
 function flatten(message) {
-  return message.excerpt;
+  return message.excerpt
 }

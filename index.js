@@ -1,34 +1,34 @@
-'use strict';
+'use strict'
 
 /* eslint-env node, browser */
 /* global atom */
 
-var CompositeDisposable = require('atom').CompositeDisposable;
+var CompositeDisposable = require('atom').CompositeDisposable
 
-exports.activate = activate;
-exports.deactivate = deactivate;
-exports.provideLinter = provideLinter;
+exports.activate = activate
+exports.deactivate = deactivate
+exports.provideLinter = provideLinter
 
 /* Internal variables. */
-var load = loadOnce;
-var minimatch;
-var engine;
-var unified;
-var markdown;
-var english;
-var control;
-var remark2retext;
-var equality;
-var profanities;
-var idleCallbacks = [];
-var subscriptions = new CompositeDisposable();
-var config = {};
+var load = loadOnce
+var minimatch
+var engine
+var unified
+var markdown
+var english
+var control
+var remark2retext
+var equality
+var profanities
+var idleCallbacks = []
+var subscriptions = new CompositeDisposable()
+var config = {}
 
 function lint(editor) {
-  load();
+  load()
 
   if (config.ignoreFiles && minimatch(editor.getPath(), config.ignoreFiles)) {
-    return [];
+    return []
   }
 
   return engine({
@@ -40,7 +40,7 @@ function lint(editor) {
     ignoreName: '.alexignore',
     defaultConfig: transform(),
     configTransform: transform
-  })(editor);
+  })(editor)
 }
 
 function provideLinter() {
@@ -50,64 +50,64 @@ function provideLinter() {
     scope: 'file',
     lintsOnChange: true,
     lint: lint
-  };
+  }
 }
 
 function activate() {
-  var schema = require('./package').configSchema;
-  var id = window.requestIdleCallback(install);
-  idleCallbacks.push(id);
+  var schema = require('./package').configSchema
+  var id = window.requestIdleCallback(install)
+  idleCallbacks.push(id)
 
-  Object.keys(schema).forEach(function (key) {
-    subscriptions.add(atom.config.observe('linter-alex.' + key, setter));
+  Object.keys(schema).forEach(function(key) {
+    subscriptions.add(atom.config.observe('linter-alex.' + key, setter))
 
     function setter(value) {
-      config[key] = value;
+      config[key] = value
     }
-  });
+  })
 
   function install() {
-    idleCallbacks.splice(idleCallbacks.indexOf(id), 1);
+    idleCallbacks.splice(idleCallbacks.indexOf(id), 1)
 
     /* Install package dependencies */
     if (!atom.inSpecMode()) {
-      require('atom-package-deps').install('linter-alex');
+      require('atom-package-deps').install('linter-alex')
     }
 
     /* Load required modules. */
-    load();
+    load()
   }
 }
 
 function deactivate() {
-  idleCallbacks.forEach(removeIdleCallback);
-  idleCallbacks = [];
+  idleCallbacks.forEach(removeIdleCallback)
+  idleCallbacks = []
 
-  subscriptions.dispose();
+  subscriptions.dispose()
 
   function removeIdleCallback(id) {
-    window.cancelIdleCallback(id);
+    window.cancelIdleCallback(id)
   }
 }
 
 function loadOnce() {
-  engine = require('unified-engine-atom');
-  unified = require('unified');
-  english = require('retext-english');
-  markdown = require('remark-parse');
-  remark2retext = require('remark-retext');
-  control = require('remark-message-control');
-  equality = require('retext-equality');
-  profanities = require('retext-profanities');
-  minimatch = require('minimatch');
+  engine = require('unified-engine-atom')
+  unified = require('unified')
+  english = require('retext-english')
+  markdown = require('remark-parse')
+  remark2retext = require('remark-retext')
+  control = require('remark-message-control')
+  equality = require('retext-equality')
+  profanities = require('retext-profanities')
+  minimatch = require('minimatch')
 
-  load = noop;
+  load = noop
 }
 
 function noop() {}
 
 function transform(options) {
-  var settings = options || {};
+  var settings = options || {}
 
   return {
     plugins: [
@@ -122,7 +122,7 @@ function transform(options) {
       [filter, {allow: settings.allow}],
       severity
     ]
-  };
+  }
 }
 
 function filter(options) {
@@ -130,7 +130,7 @@ function filter(options) {
     name: 'alex',
     disable: options.allow,
     source: ['retext-equality', 'retext-profanities']
-  });
+  })
 }
 
 function severity() {
@@ -139,15 +139,15 @@ function severity() {
     1: false,
     2: true,
     undefined: false
-  };
+  }
 
-  return transformer;
+  return transformer
 
   function transformer(tree, file) {
-    file.messages.forEach(transform);
+    file.messages.forEach(transform)
   }
 
   function transform(message) {
-    message.fatal = map[message.profanitySeverity];
+    message.fatal = map[message.profanitySeverity]
   }
 }
