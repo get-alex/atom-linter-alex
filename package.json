@@ -45,8 +45,8 @@
     "retext-english": "^3.0.0",
     "retext-equality": "^3.0.0",
     "retext-profanities": "^4.1.0",
-    "unified": "^6.1.2",
-    "unified-engine-atom": "^5.0.0"
+    "unified": "^7.0.0",
+    "unified-engine-atom": "^7.0.0"
   },
   "atomTestRunner": "atom-tap-test-runner",
   "package-deps": [
