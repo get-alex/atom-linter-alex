@@ -27,8 +27,8 @@
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
     "Blake Embrey <hello@blakeembrey.com>"
   ],
-  "repository": "https://github.com/wooorm/atom-linter-alex",
-  "bugs": "https://github.com/wooorm/atom-linter-alex/issues",
+  "repository": "https://github.com/get-alex/atom-linter-alex",
+  "bugs": "https://github.com/get-alex/atom-linter-alex/issues",
   "main": "index.js",
   "files": [
     "index.js"

@@ -1,4 +1,4 @@
-# atom-linter-alex [![Build Status](https://img.shields.io/travis/wooorm/atom-linter-alex.svg)](https://travis-ci.org/wooorm/atom-linter-alex)
+# atom-linter-alex [![Build Status](https://img.shields.io/travis/get-alex/atom-linter-alex.svg)](https://travis-ci.org/get-alex/atom-linter-alex)
 
 [Atom][atom] [linter][linter] meets [alex][alex] to catch potentially
 insensitive, inconsiderate writing.
@@ -29,9 +29,9 @@ Issues regarding `linter-alex` should be opened in this
 
 [linter]: https://github.com/AtomLinter/Linter
 
-[alex]: https://github.com/wooorm/alex
+[alex]: https://github.com/get-alex/alex
 
-[screencast]: https://rawgit.com/wooorm/atom-linter-alex/master/screencast.gif
+[screencast]: https://rawgit.com/get-alex/atom-linter-alex/master/screencast.gif
 
 [apm]: https://github.com/atom/apm
 
@@ -39,6 +39,6 @@ Issues regarding `linter-alex` should be opened in this
 
 [author]: http://wooorm.com
 
-[linter-issues]: https://github.com/wooorm/atom-linter-alex/issues
+[linter-issues]: https://github.com/get-alex/atom-linter-alex/issues
 
-[alex-issues]: https://github.com/wooorm/alex/issues
+[alex-issues]: https://github.com/get-alex/alex/issues
