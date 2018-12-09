@@ -31,7 +31,7 @@ Issues regarding `linter-alex` should be opened in this
 
 [alex]: https://github.com/get-alex/alex
 
-[screencast]: https://rawgit.com/get-alex/atom-linter-alex/master/screencast.gif
+[screencast]: https://raw.githubusercontent.com/get-alex/atom-linter-alex/4bd56c8/screencast.gif
 
 [apm]: https://github.com/atom/apm
 
