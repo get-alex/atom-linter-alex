@@ -42,7 +42,7 @@ test('linter-alex', function(t) {
           'Don’t use `slaves`, it’s profane (retext-profanities:slaves)',
           '`boogeyman` may be insensitive, use `boogey` instead (retext-equality:boogeyman-boogeywoman)',
           '`master` / `slaves` may be insensitive, use `primary` / `replica` instead (retext-equality:master-slave)',
-          '`cripple` may be insensitive, use `person with a limp` instead (retext-equality:cripple)',
+          '`cripple` may be insensitive, use `person with a limp` instead (retext-equality:gimp)',
           '`he` may be insensitive, use `they`, `it` instead (retext-equality:he-she)'
         ],
         'should emit messages'
