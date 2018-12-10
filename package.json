@@ -22,9 +22,9 @@
     "english",
     "linter"
   ],
-  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
   "contributors": [
-    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
     "Blake Embrey <hello@blakeembrey.com>"
   ],
   "repository": "https://github.com/get-alex/atom-linter-alex",

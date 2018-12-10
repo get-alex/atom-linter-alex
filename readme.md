@@ -37,7 +37,7 @@ Issues regarding `linter-alex` should be opened in this
 
 [license]: license
 
-[author]: http://wooorm.com
+[author]: https://wooorm.com
 
 [linter-issues]: https://github.com/get-alex/atom-linter-alex/issues
 
