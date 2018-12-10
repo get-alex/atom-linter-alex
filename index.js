@@ -15,8 +15,9 @@ var minimatch
 var engine
 var unified
 var markdown
+var frontmatter
 var english
-var control
+var filter
 var remark2retext
 var equality
 var profanities
@@ -95,8 +96,9 @@ function loadOnce() {
   unified = require('unified')
   english = require('retext-english')
   markdown = require('remark-parse')
+  frontmatter = require('remark-frontmatter')
   remark2retext = require('remark-retext')
-  control = require('remark-message-control')
+  filter = require('alex/filter')
   equality = require('retext-equality')
   profanities = require('retext-profanities')
   minimatch = require('minimatch')
@@ -112,6 +114,7 @@ function transform(options) {
   return {
     plugins: [
       markdown,
+      [frontmatter, ['yaml', 'toml']],
       [
         remark2retext,
         unified()
@@ -123,14 +126,6 @@ function transform(options) {
       severity
     ]
   }
-}
-
-function filter(options) {
-  return control({
-    name: 'alex',
-    disable: options.allow,
-    source: ['retext-equality', 'retext-profanities']
-  })
 }
 
 function severity() {
