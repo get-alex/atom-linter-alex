@@ -9,7 +9,7 @@ exports.activate = activate
 exports.deactivate = deactivate
 exports.provideLinter = provideLinter
 
-/* Internal variables. */
+// Internal variables.
 var load = loadOnce
 var minimatch
 var engine
@@ -70,12 +70,12 @@ function activate() {
   function install() {
     idleCallbacks.splice(idleCallbacks.indexOf(id), 1)
 
-    /* Install package dependencies */
+    // Install package dependencies
     if (!atom.inSpecMode()) {
       require('atom-package-deps').install('linter-alex')
     }
 
-    /* Load required modules. */
+    // Load required modules.
     load()
   }
 }
