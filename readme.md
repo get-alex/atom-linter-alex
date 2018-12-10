@@ -35,7 +35,7 @@ Issues regarding `linter-alex` should be opened in this
 
 [apm]: https://github.com/atom/apm
 
-[license]: LICENSE
+[license]: license
 
 [author]: http://wooorm.com
 
