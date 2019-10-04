@@ -37,18 +37,18 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "alex": "^7.0.0",
-    "atom-package-deps": "^4.0.0",
+    "alex": "^8.0.0",
+    "atom-package-deps": "^5.0.0",
     "minimatch": "^3.0.0",
-    "remark-frontmatter": "^1.3.1",
-    "remark-message-control": "^4.0.0",
-    "remark-parse": "^6.0.0",
+    "remark-frontmatter": "^1.0.0",
+    "remark-message-control": "^5.0.0",
+    "remark-parse": "^7.0.0",
     "remark-retext": "^3.0.0",
     "retext-english": "^3.0.0",
-    "retext-equality": "^3.0.0",
-    "retext-profanities": "^4.1.0",
-    "unified": "^7.0.0",
-    "unified-engine-atom": "^7.0.0"
+    "retext-equality": "^4.2.0",
+    "retext-profanities": "^5.0.0",
+    "unified": "^8.0.0",
+    "unified-engine-atom": "^8.0.0"
   },
   "atomTestRunner": "atom-tap-test-runner",
   "package-deps": [
@@ -62,13 +62,13 @@
     }
   },
   "devDependencies": {
-    "atom-tap-test-runner": "^5.0.0",
-    "prettier": "^1.12.1",
+    "atom-tap-test-runner": "^6.0.0",
+    "prettier": "^1.0.0",
     "rehype-parse": "^6.0.0",
-    "remark-cli": "^6.0.0",
-    "remark-preset-wooorm": "^4.0.0",
-    "tape": "^4.6.0",
-    "xo": "^0.23.0"
+    "remark-cli": "^7.0.0",
+    "remark-preset-wooorm": "^6.0.0",
+    "tape": "^4.0.0",
+    "xo": "^0.25.0"
   },
   "scripts": {
     "format": "remark . -qfo && prettier --write '**/*.js' && xo --fix",

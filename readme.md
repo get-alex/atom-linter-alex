@@ -1,6 +1,6 @@
 # atom-linter-alex [![Build Status](https://img.shields.io/travis/get-alex/atom-linter-alex.svg)](https://travis-ci.org/get-alex/atom-linter-alex)
 
-[Atom][atom] [linter][linter] meets [alex][alex] to catch potentially
+[Atom][] [linter][] meets [alex][] to catch potentially
 insensitive, inconsiderate writing.
 
 ![screencast][]
